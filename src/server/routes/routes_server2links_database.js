@@ -18,7 +18,7 @@ router.post("/add", async (req, res) => {
   };
   console.log(newLink);
   await pool.query("INSERT INTO links SET ?", [newLink]);
-  req.flash('success', 'Link saved succesfully');
+  req.flash("success", "Link saved succesfully");
   res.redirect("/links");
 });
 
@@ -32,9 +32,14 @@ router.get("/delete/:id", async (req, res) => {
   const { id } = req.params;
   console.log("Link Eliminado: ", id);
   await pool.query("DELETE FROM `links` WHERE id= ?;", [id]);
+  req.flash("success", "Link Romeved Successfully");
   res.redirect("/links");
 });
 
+
+// Se requieren dos rutas para editar un elemento de la Base de Datos
+// Las peticiones al servidor de tipo put y delete no existen en HTML, pero si existen en HTTP y no se prevee que sea implementado en el futuro.
+// se hace uso de la petición de tipo 'get' pero con un 'edit/' para desarrollar este tipo de consultas hacia la base de datos a través de un servidor.
 router.get("/edit/:id", async (req, res) => {
   const { id } = req.params;
   console.log("Link a Editar: ", id);
@@ -46,16 +51,18 @@ router.get("/edit/:id", async (req, res) => {
   res.render("links/edit", { link: links[0] });
 });
 
-router.post('/edit/:id', async (req, res) => {
+router.post("/edit/:id", async (req, res) => {
   const { id } = req.params;
   const { title, description, url } = req.body;
   const newLink = {
     title,
     description,
-    url
+    url,
   };
-  await pool.query('UPDATE `links` SET ? WHERE id= ?', [newLink, id]);
-  res.redirect('/links');
+
+  await pool.query("UPDATE `links` SET ? WHERE id= ?", [newLink, id]);
+  req.flash("success", "Link Updated Successfully");
+  res.redirect("/links");
 });
 
 module.exports = router;
