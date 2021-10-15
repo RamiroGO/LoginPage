@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const patch = require('path');
+const flash = require('connect-flash');
 
 // initializations
 const connect_server = express();
@@ -23,9 +24,12 @@ connect_server.set('view engine', '.hbs');
 connect_server.use(morgan('dev'));
 connect_server.use(express.urlencoded({ extended: false }));
 connect_server.use(express.json());
+// - Importar servicio para enviar mensajes entre vistas:
+connect_server.use(flash());
 
 // Global Variables
 connect_server.use((req, res, next) => {
+	connect_server.locals.success = req.flash('success');
 	next();
 })
 
