@@ -6,10 +6,12 @@ const flash = require("connect-flash");
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('../database/keys.js');
+const passport = require("passport");
 
 // initializations
 const connect_server = express();
 const PORT = 3000;
+require('../lib/passport');
 
 // Settings
 connect_server.set("port", process.env.PORT || PORT);
@@ -37,17 +39,17 @@ connect_server.use(session({
 }));
 
 connect_server.use(flash());
-// connect_server.use(passport.initialize());
-// connect_server.use(passport.session());
-
 connect_server.use(morgan("dev"));
 connect_server.use(express.urlencoded({ extended: false }));
 connect_server.use(express.json());
+// - Passport para desarrollar el SignUp del Usuario
+connect_server.use(passport.initialize()); //
+connect_server.use(passport.session());
 
 // Global Variables
 connect_server.use((req, res, next) => {
-  connect_server.locals.message = req.flash("message");
   connect_server.locals.success = req.flash('success');
+  connect_server.locals.message = req.flash("message");
   connect_server.locals.user = req.user;
   next();
 });
