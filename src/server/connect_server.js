@@ -32,7 +32,7 @@ connect_server.use((req, res, next) => {
 // Routes
 connect_server.use(require('./routes/routes.js'));
 connect_server.use(require('./routes/authentication'));
-connect_server.use('/links', require('./routes/routes_links.js'));
+connect_server.use('/links', require('./routes/routes_server2links_database.js'));
 
 // Public
 connect_server.use(express.static(patch.join(__dirname, 'public')));
