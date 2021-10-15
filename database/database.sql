@@ -1,0 +1,28 @@
+SHOW DATABASES;
+DROP SCHEMA IF EXISTS database_links;
+CREATE DATABASE IF NOT EXISTS database_links;
+USE database_links;
+DROP TABLE IF EXISTS users;
+CREATE TABLE users(
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(20) NOT NULL,
+  password VARCHAR(60) NOT null,
+  fullname VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id)
+);
+/*
+-- ALTER TABLE users ADD PRIMARY KEY(id);
+-- ALTER TABLE users MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+*/
+DESCRIBE users;
+-- LINKS TABLE
+CREATE TABLE IF NOT EXISTS links(
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  title VARCHAR(150) NOT NULL,
+  url VARCHAR(255) NOT NULL,
+  descripetion TEXT,
+  user_id INT(11),
+  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id),
+  PRIMARY KEY (id)
+);
