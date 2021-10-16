@@ -2,6 +2,17 @@ SHOW DATABASES;
 DROP SCHEMA IF EXISTS `database_links`;
 CREATE DATABASE IF NOT EXISTS `database_links`;
 USE `database_links`;
+
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE IF NOT EXISTS `sessions`(
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(20) NOT NULL,
+  password VARCHAR(60) NOT null,
+  fullname VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id)
+);
+
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`(
   id INT(11) NOT NULL AUTO_INCREMENT,
