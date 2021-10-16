@@ -1,6 +1,35 @@
-body{
+body {
 	align-items: center;
-	background: #f5f6f5;
+	background : #f5f6f5;
 	font-family: 'Oswald', sans-serif;
-	overflow: hidden;
+	overflow   : hidden;
+}
+
+.index {
+	width : 100vw;
+	height: 100vh;
+}
+
+.masthead {
+	color              : red;
+	min-height         : 40rem;
+	width              : 100%;
+	height             : 100%;
+	padding-top        : 8rem;
+	background         : url('/src/public/img/background.jpg');
+	background-position: center center;
+	background-repeat  : no-repeat;
+	background-size    : cover;
+}
+
+.masthead h1 {
+	font-size: 4rem;
+	margin   : 0;
+	padding  : 0;
+}
+
+@media(min-width:992px) {
+	.masthead h1 {
+		font-size: 5.5rem;
+	}
 }

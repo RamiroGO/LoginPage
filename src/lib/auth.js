@@ -1,3 +1,6 @@
+// 'isLoggedIn' 	: Solo se debe implementar en las rutas que se desean proteger, no en las rutas de acceso.
+// 'isNotLoggedIn' 	: Solo se debe implementar en las rutas para usuarios que no han accedido o no se han registrado.
+
 module.exports = {
 	// Método para determinar si existe un usuario loggueado.
 	// Cuando se implementa este método, los usuarios que no están logueados no pueden acceder a las rutas donde se implementaron.
