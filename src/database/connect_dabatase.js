@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { promisify} = require('util');
+const { promisify } = require('util');
 const { database } = require('./keys.js');
 
 // En lugar de createConnetion se usa createPool para que las conexiones se ejecuten en secuencia.
@@ -19,9 +19,14 @@ pool.getConnection((err, connection) => {
 		if (err.code === 'ECONNREFUSED') {
 			console.log('DATABASE CONNECTION WAS REFUSED')
 		}
+		if (err.code == "ER_BAD_DB_ERROR") {
+			console.log('DB is not Connected:');
+		}
 	}
-	if (connection) connection.release();
-	console.log('DB is Connected');
+	else {
+		console.log('DB is Connected');
+		connection.release();
+	}
 	return;
 });
 

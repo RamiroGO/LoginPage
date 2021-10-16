@@ -3,18 +3,17 @@ DROP SCHEMA IF EXISTS `database_links`;
 CREATE DATABASE IF NOT EXISTS `database_links`;
 USE `database_links`;
 
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE IF NOT EXISTS `sessions`(
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(20) NOT NULL,
-  password VARCHAR(60) NOT null,
-  fullname VARCHAR(100) NOT NULL,
-  PRIMARY KEY(id)
+DROP TABLE IF EXISTS `database_links`.`sessions`;
+CREATE TABLE IF NOT EXISTS `database_links`.`sessions`(
+  `session_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `data` VARCHAR(128) NOT NULL,
+  `expires` MEDIUMTEXT,
+  PRIMARY KEY(session_id)
 );
 
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users`(
+DROP TABLE IF EXISTS `database_links`.`users`;
+CREATE TABLE IF NOT EXISTS `database_links`.`users`(
   id INT(11) NOT NULL AUTO_INCREMENT,
   username VARCHAR(20) NOT NULL,
   password VARCHAR(60) NOT null,
@@ -25,10 +24,10 @@ CREATE TABLE `users`(
 -- ALTER TABLE `users` ADD PRIMARY KEY(id);
 -- ALTER TABLE `users` MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
 */
-DESCRIBE `users`;
+DESCRIBE `database_links`.`users`;
 -- LINKS TABLE
-DROP TABLE IF EXISTS `links`;
-CREATE TABLE IF NOT EXISTS `links` (
+DROP TABLE IF EXISTS `database_links`.`links`;
+CREATE TABLE IF NOT EXISTS `database_links`.`links` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
   `url` varchar(255) NOT NULL,
