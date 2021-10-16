@@ -17,7 +17,6 @@ helpers.encryptPassword = async (password) => {
 // Comparador de Contraseña para realizar el logeo del usuario
 helpers.matchPassword = async (password, savedPassword) => {
 	try {
-		console.log('here')
 		return await bcrypt.compare(password, savedPassword);
 	}
 	catch (e) {

@@ -6,11 +6,13 @@ const flash = require("connect-flash");
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('../database/keys.js');
+// Importar passport en el conector del servidor para poder ejecutar su código principal
 const passport = require("passport");
 
 // initializations
 const connect_server = express();
 const PORT = 3000;
+// - Cargar el archivo passport que tenemos creado. 
 require('../lib/passport');
 
 // Settings
@@ -43,13 +45,17 @@ connect_server.use(morgan("dev"));
 connect_server.use(express.urlencoded({ extended: false }));
 connect_server.use(express.json());
 // - Passport para desarrollar el SignUp del Usuario
-connect_server.use(passport.initialize()); //
+connect_server.use(passport.initialize());
 connect_server.use(passport.session());
 
 // Global Variables
 connect_server.use((req, res, next) => {
+  // Mensaje de validación Verde
   connect_server.locals.success = req.flash('success');
+  // Mensaje de validación Rojo
   connect_server.locals.message = req.flash("message");
+  // Variable de validación del usuario activo
+  // La variable user ahora es accesible desde el HTML
   connect_server.locals.user = req.user;
   next();
 });
@@ -59,7 +65,7 @@ connect_server.use(require("./routes/routes.js"));
 connect_server.use(require("./routes/authentication"));
 connect_server.use(
   "/links",
-  require("./routes/routes_server2links_database.js")
+  require("./routes/routes.js")
 );
 
 // Public
