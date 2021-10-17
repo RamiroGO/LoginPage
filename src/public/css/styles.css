@@ -28,6 +28,12 @@ body {
 	padding  : 0;
 }
 
+/* .container {
+	align-items  : center center;
+	align-content: center center;
+	background   : #55Ff00
+} */
+
 @media(min-width:992px) {
 	.masthead h1 {
 		font-size: 5.5rem;

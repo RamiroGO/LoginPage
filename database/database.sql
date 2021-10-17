@@ -5,10 +5,10 @@ USE `database_links`;
 
 DROP TABLE IF EXISTS `database_links`.`sessions`;
 CREATE TABLE IF NOT EXISTS `database_links`.`sessions`(
-  `session_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `data` VARCHAR(128) NOT NULL,
-  `expires` MEDIUMTEXT,
-  PRIMARY KEY(session_id)
+  `session_id` VARCHAR(128) NOT NULL,
+  `expires` INT NULL,
+  `data` MEDIUMTEXT NULL,
+  PRIMARY KEY(`session_id`)
 );
 
 
