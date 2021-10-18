@@ -1,3 +1,4 @@
+// Importar Librerías
 const express = require("express");
 const morgan = require("morgan");
 const exphbs = require("express-handlebars");
@@ -25,7 +26,7 @@ connect_server.engine(
     layoutsDir: patch.join(connect_server.get("views"), "layouts"),
     partialsDir: patch.join(connect_server.get("views"), "partials"),
     extname: ".hbs",
-    helpers: require("../lib/handlebars.js"),
+    helpers: require("../lib/time_ago.js"),
   })
 );
 connect_server.set("view engine", ".hbs");

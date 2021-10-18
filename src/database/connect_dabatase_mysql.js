@@ -5,10 +5,10 @@ const { database } = require('./keys.js');
 // En lugar de createConnetion se usa createPool para que las conexiones se ejecuten en secuencia.
 // Desventaja: Este módulo te obliga a hacer uso del CallBack, por tanto, No se puede hacer uso del sync await.
 // Solución: hacer uso de un módulo de Node llamado 'util'.
-const pool = mysql.createPool(database);
+const connect_mysql = mysql.createPool(database);
 
 // Mensajes de error generalizados.
-pool.getConnection((err, connection) => {
+connect_mysql.getConnection((err, connection) => {
 	if (err) {
 		if (err.code === 'PROTOCOL CONNECTION_LOST') {
 			console.error('DATABASE CONNECTION WAS CLOSED');
@@ -31,6 +31,6 @@ pool.getConnection((err, connection) => {
 });
 
 // Convertir código de Call Back a código de Promesa.
-pool.query = promisify(pool.query);
+connect_mysql.query = promisify(connect_mysql.query);
 
-module.exports = pool;
+module.exports = connect_mysql;

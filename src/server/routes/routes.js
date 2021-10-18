@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const pool = require("../../database/connect_dabatase.js");
+const pool = require("../../database/connect_dabatase_mysql.js");
 
 // Solo se debe implementar en las rutas que se desean proteger, no en las rutas de acceso.
-const { isLoggedIn } = require("../../lib/auth.js");
+const { isLoggedIn } = require("../../lib/is_logged.js");
 
 /*
  Todas las rutas declaradas en este archivo se les añadirá en su comienzo con '/links'

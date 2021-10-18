@@ -4,6 +4,7 @@
 module.exports = {
 	// Método para determinar si existe un usuario loggueado.
 	// Cuando se implementa este método, los usuarios que no están logueados no pueden acceder a las rutas donde se implementaron.
+	// El método 'isAuthenticated' solo existe si se hace uso de la librería 'passport' y se inicializa para ser usada por las rutas en sus 'Request'.
 	isLoggedIn(req, res, next) {
 		if (req.isAuthenticated()) {
 			return next();

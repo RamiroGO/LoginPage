@@ -5,7 +5,7 @@ const router = express.Router();
 const passport = require("passport");
 
 // Solo se debe implementar en las rutas que se desean proteger, no en las rutas de acceso.
-const { isLoggedIn, isNotLoggedIn } = require("../../lib/auth");
+const { isLoggedIn, isNotLoggedIn } = require("../../lib/is_logged");
 
 // Se requieren dos enrutadores para hacer un Acceso de Usuario 'SignUp'
 router.get("/signup", isNotLoggedIn, (req, res) => {

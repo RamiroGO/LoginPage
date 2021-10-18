@@ -1,8 +1,8 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
-const connect_database = require("../database/connect_dabatase");
-const helpers = require("../lib/helpers.js");
+const connect_database = require("../database/connect_dabatase_mysql");
+const encrypt_psw = require("./encrypt_psw.js");
 
 // nombre de los campos que escribre el usuario en el view del handlebars / HTML
 const fields_user = {
@@ -28,7 +28,7 @@ passport.use("local.signin", new LocalStrategy(fields_user,
 		if (rows_users.length > 0) {
 			const user = rows_users[0];
 			// Comparación de la contraseña ingresada con la Registrada a través de un método en 'helpers'.
-			const validPassword = await helpers.matchPassword(
+			const validPassword = await encrypt_psw.matchPassword(
 				password,
 				user.password
 			);
@@ -66,7 +66,7 @@ passport.use("local.signup", new LocalStrategy(
 		};
 
 		// Cifrar Contraseña
-		newUser.password = await helpers.encryptPassword(password);
+		newUser.password = await encrypt_psw.encryptPassword(password);
 		// console.log("Datos del usuario cifrados:", newUser);
 
 		// Guardar el Usuario en la Base de Datos
