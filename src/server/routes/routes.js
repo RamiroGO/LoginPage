@@ -6,12 +6,11 @@ const pool = require("../../database/connect_dabatase_mysql.js");
 // Solo se debe implementar en las rutas que se desean proteger, no en las rutas de acceso.
 const { isLoggedIn } = require("../../lib/is_logged.js");
 
-/*
- Todas las rutas declaradas en este archivo se les añadirá en su comienzo con '/links'
- Por tanto:
- - Todas implementarán 'isLoggedIn' en su método.
+/* 
+ * Todas las rutas declaradas en este archivo se les añadirá en su comienzo con '/links'
+ * Por tanto:
+ * - Todas implementarán 'isLoggedIn' en su método.
  */
-
 
 router.get("/", isLoggedIn, async (req, res) => {
   const links = await pool.query("SELECT * FROM `links` WHERE user_id = ?;", [req.user.id]);
